@@ -1,4 +1,5 @@
 class Department {
+  static fiscalYear = 2022;
   // private readonly id: string;
   // private name: string;
   //   private employees: string[] = [];
@@ -7,6 +8,10 @@ class Department {
   constructor(private readonly id: string, public name: string) {
     // this.id = id;
     // this.name = n;
+  }
+
+  static createEmployee(name: string) {
+    return { name: name };
   }
 
   describe(this: Department) {
@@ -36,17 +41,17 @@ class AccountingDepartment extends Department {
   private lastReport: string;
 
   get mostRecentReport() {
-      if(this.lastReport) {
-          return this.lastReport;
-      }
-      throw new Error('No report found')
+    if (this.lastReport) {
+      return this.lastReport;
+    }
+    throw new Error("No report found");
   }
 
   set mostRecentReport(value: string) {
-      if(!value) {
-          throw new Error('Please pass in a valid value')
-      }
-      this.addReport(value)
+    if (!value) {
+      throw new Error("Please pass in a valid value");
+    }
+    this.addReport(value);
   }
 
   constructor(id: string, private reports: string[]) {
@@ -68,6 +73,9 @@ class AccountingDepartment extends Department {
   }
 }
 
+const employee1 = Department.createEmployee("Maximilan");
+console.log(employee1, Department.fiscalYear);
+
 // const it = new Department("d1", "it");
 const it = new ITDepartment("d1", ["Max"]);
 console.log(it);
@@ -86,11 +94,10 @@ it.printEmployeeInformation();
 
 const accounting = new AccountingDepartment("d2", []);
 
-accounting.mostRecentReport = 'Your End Report'
-
+accounting.mostRecentReport = "Your End Report";
 
 accounting.addReport("Something went wrong...");
-console.log(accounting.mostRecentReport)
+console.log(accounting.mostRecentReport);
 accounting.addEmployee("Max");
 accounting.addEmployee("Maxim");
 accounting.printReports();
