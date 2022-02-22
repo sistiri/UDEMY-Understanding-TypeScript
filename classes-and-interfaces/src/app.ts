@@ -23,16 +23,43 @@ class Department {
   }
 }
 
-const accounting = new Department("d1", "Accounting");
+class ITDepartment extends Department {
+  admins: string[];
+  constructor(id: string, admins: string[]) {
+    super(id, "IT");
+    this.admins = admins;
+  }
+}
 
-accounting.addEmployee("Max");
-accounting.addEmployee("Manu");
+class AccountingDepartment extends Department {
+  constructor(id: string, private reports: string[]) {
+    super(id, "Accounting");
+  }
+  addReport(text: string) {
+    this.reports.push(text);
+  }
+  printReports() {
+    console.log(this.reports);
+  }
+}
 
-// accounting.employees[2] = "Anna"  // NOT WORKING because PRIVATE property
+// const it = new Department("d1", "it");
+const it = new ITDepartment("d1", ["Max"]);
+console.log(it);
 
-accounting.describe();
-accounting.name = "NEW NAME";
-accounting.printEmployeeInformation();
+it.addEmployee("Max");
+it.addEmployee("Manu");
 
-// const accountingCopy = { name: "MUST HAVE", describe: accounting.describe };
-// accountingCopy.describe();
+// it.employees[2] = "Anna"  // NOT WORKING because PRIVATE property
+
+it.describe();
+it.name = "NEW NAME";
+it.printEmployeeInformation();
+
+// const itCopy = { name: "MUST HAVE", describe: it.describe };
+// itCopy.describe();
+
+const accounting = new AccountingDepartment("d2", []);
+accounting.addReport("Something went wrong...");
+accounting.printReports();
+console.log(accounting)
