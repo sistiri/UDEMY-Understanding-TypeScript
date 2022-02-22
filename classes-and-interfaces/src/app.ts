@@ -1,9 +1,9 @@
 class Department {
-  // private id: string;
+  // private readonly id: string;
   // private name: string;
   private employees: string[] = [];
 
-  constructor(private id: string, public name: string) {
+  constructor(private readonly id: string, public name: string) {
     // this.id = id;
     // this.name = n;
   }
@@ -12,6 +12,8 @@ class Department {
     console.log(`Department (${this.id}): ${this.name}`);
   }
   addEmployee(employee: string) {
+    //   validation etc
+    // this.id = d2;    // NOT WORKING because READONLY property
     this.employees.push(employee);
   }
 
@@ -21,7 +23,7 @@ class Department {
   }
 }
 
-const accounting = new Department('d1', "Accounting");
+const accounting = new Department("d1", "Accounting");
 
 accounting.addEmployee("Max");
 accounting.addEmployee("Manu");
@@ -29,7 +31,7 @@ accounting.addEmployee("Manu");
 // accounting.employees[2] = "Anna"  // NOT WORKING because PRIVATE property
 
 accounting.describe();
-accounting.name = 'NEW NAME'
+accounting.name = "NEW NAME";
 accounting.printEmployeeInformation();
 
 // const accountingCopy = { name: "MUST HAVE", describe: accounting.describe };
