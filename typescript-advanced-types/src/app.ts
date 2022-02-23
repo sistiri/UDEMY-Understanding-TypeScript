@@ -103,4 +103,19 @@ function moveAnimal(animal: Animal) {
   console.log("Moving at speed: " + speed);
 }
 
-moveAnimal({type: 'bird', flyingSpeed:10})
+moveAnimal({ type: "bird", flyingSpeed: 10 });
+
+// TYPE CASTING
+
+// const paragraph = document.querySelector('p')            //HTMLParagraphElement
+const paragraph = document.getElementById("message-output");//HTMLElement
+
+// const userInputElement = <HTMLInputElement>document.getElementById("user-input")!; // GOOD if NOT REACT
+const userInputElement = document.getElementById("user-input")! as HTMLInputElement; // GOOD with REACT & JSX
+userInputElement.value = "Hi there!";
+
+// Alternative solution for exlamation mark (make sure it's not NULL):
+const userInputElement2 = document.getElementById("user-input2")// GOOD with REACT
+if(userInputElement2) {
+    (userInputElement2 as HTMLInputElement).value = 'Hi there!'
+}
