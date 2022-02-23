@@ -153,3 +153,15 @@ const result2 = add("Max", " Schwarz"); //without overload: infered type: string
 
 result2.split(" "); // Without overload: string methods can't be uses on string |number type
 // result1.split(" "); ERROR - its a number type
+
+// OPTIONAL CHAINING
+
+const fetchedUserData = {
+    id: 'u1',
+    name: 'Max',
+    job: {title: 'CEO', description: 'My Own Company'}
+}
+
+// console.log(fetchedUserData.job && fetchedUserData.job.title) // JavaScript Solution to avoid runtime error
+console.log(fetchedUserData?.job?.title) // TypeScript Solution
+
