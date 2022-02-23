@@ -165,3 +165,11 @@ const fetchedUserData = {
 // console.log(fetchedUserData.job && fetchedUserData.job.title) // JavaScript Solution to avoid runtime error
 console.log(fetchedUserData?.job?.title) // TypeScript Solution
 
+// NULLIS COALESCING
+
+const userInput = ''
+
+// const storedData = userInput || 'DEFAULT'
+const storedData = userInput ?? 'DEFAULT'
+
+console.log(storedData)
