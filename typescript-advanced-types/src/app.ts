@@ -108,14 +108,29 @@ moveAnimal({ type: "bird", flyingSpeed: 10 });
 // TYPE CASTING
 
 // const paragraph = document.querySelector('p')            //HTMLParagraphElement
-const paragraph = document.getElementById("message-output");//HTMLElement
+const paragraph = document.getElementById("message-output"); //HTMLElement
 
 // const userInputElement = <HTMLInputElement>document.getElementById("user-input")!; // GOOD if NOT REACT
-const userInputElement = document.getElementById("user-input")! as HTMLInputElement; // GOOD with REACT & JSX
+const userInputElement = document.getElementById(
+  "user-input"
+)! as HTMLInputElement; // GOOD with REACT & JSX
 userInputElement.value = "Hi there!";
 
 // Alternative solution for exlamation mark (make sure it's not NULL):
-const userInputElement2 = document.getElementById("user-input2")// GOOD with REACT
-if(userInputElement2) {
-    (userInputElement2 as HTMLInputElement).value = 'Hi there!'
+const userInputElement2 = document.getElementById("user-input2"); // GOOD with REACT
+if (userInputElement2) {
+  (userInputElement2 as HTMLInputElement).value = "Hi there!";
 }
+
+// INDEX PROPERTY TYPES
+
+interface ErrorContainer {
+  //{email: 'Not a valid email!',
+  // username: 'Must start with a character!' }
+  [prop: string]: string;
+}
+
+const errorBag: ErrorContainer = {
+  email: "Not a valid email!",
+  username: "Must start with a capitol character!",
+};
