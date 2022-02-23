@@ -408,7 +408,10 @@ Temporary Items
 !.vscode/launch.json
 !.vscode/extensions.json
 !.vscode/*.code-snippets
+<<<<<<< HEAD
 launch.json
+=======
+>>>>>>> dev
 
 # Local History for Visual Studio Code
 .history/
