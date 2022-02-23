@@ -25,12 +25,12 @@ type Universal = Combinable & Numeric;
 
 // TYPE GUARDS
 
-function add(a: Combinable, b: Combinable) {
-  if (typeof a === "string" || typeof b === "string") {
-    return a.toString() + b.toString();
-  }
-  return a + b;
-}
+// function add(a: Combinable, b: Combinable) {
+//   if (typeof a === "string" || typeof b === "string") {
+//     return a.toString() + b.toString();
+//   }
+//   return a + b;
+// }
 
 type UnknownEmployee = Employee | Admin;
 function printEmoloyeeInformation(emp: UnknownEmployee) {
@@ -134,3 +134,22 @@ const errorBag: ErrorContainer = {
   email: "Not a valid email!",
   username: "Must start with a capitol character!",
 };
+
+// FUNCTION
+
+function add(a: number, b: number): number;
+function add(a: string, b: string): string;
+function add(a: string, b: number): string;
+function add(a: number, b: string): string;
+function add(a: Combinable, b: Combinable) {
+  if (typeof a === "string" || typeof b === "string") {
+    return a.toString() + b.toString();
+  }
+  return a + b;
+}
+
+const result1 = add(1, 5); // without overload: infered type: string | number
+const result2 = add("Max", " Schwarz"); //without overload: infered type: string | number
+
+result2.split(" "); // Without overload: string methods can't be uses on string |number type
+// result1.split(" "); ERROR - its a number type
