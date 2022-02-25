@@ -45,18 +45,22 @@ function Log2(target: any, name: string, descriptor: PropertyDescriptor) {
   console.log(descriptor);
 }
 
-function Log3(target: any, name: string | Symbol, descriptor: PropertyDescriptor) {
-    console.log("---- Method decorator! ----");
-    console.log(target);
-    console.log(name);
-    console.log(descriptor);
+function Log3(
+  target: any,
+  name: string | Symbol,
+  descriptor: PropertyDescriptor
+) {
+  console.log("---- Method decorator! ----");
+  console.log(target);
+  console.log(name);
+  console.log(descriptor);
 }
 
 function Log4(target: any, name: string | Symbol, position: number) {
-    console.log("---- Parameter decorator! ----");
-    console.log(target);
-    console.log(name);
-    console.log(position);
+  console.log("---- Parameter decorator! ----");
+  console.log(target);
+  console.log(name);
+  console.log(position);
 }
 
 class Product {
@@ -84,29 +88,28 @@ class Product {
   }
 }
 
-
 // <---------------------------------------------------->
 // Returning (and changing) a Class in a Class Decorator
 // <----------------------------------------------------->
 
 function WithTemplate2(template: string, hookId: string) {
-    console.log('TEMPLATE FACTORY');
-    return function<T extends { new (...args: any[]): {name: string} }>(
-      originalConstructor: T
-    ) {
-      return class extends originalConstructor {
-        constructor(..._: any[]) {
-          super();
-          console.log('Rendering template');
-          const hookEl = document.getElementById(hookId);
-          if (hookEl) {
-            hookEl.innerHTML = template;
-            hookEl.querySelector('h1')!.textContent = this.name;
-          }
+  console.log("TEMPLATE FACTORY");
+  return function <T extends { new (...args: any[]): { name: string } }>(
+    originalConstructor: T
+  ) {
+    return class extends originalConstructor {
+      constructor(..._: any[]) {
+        super();
+        console.log("Rendering template");
+        const hookEl = document.getElementById(hookId);
+        if (hookEl) {
+          hookEl.innerHTML = template;
+          hookEl.querySelector("h1")!.textContent = this.name;
         }
-      };
+      }
     };
-  }
+  };
+}
 
 @Logger("LOGGING - PERSON - 2")
 @WithTemplate2("<h1></h1>", "app2")
@@ -119,3 +122,37 @@ class Person2 {
 
 const pers2 = new Person2();
 console.log(pers2);
+
+// CREATING AN AUTOBIND DECORATOR
+
+function Autobind(
+  _: any,
+  _2: string,
+  descriptor: PropertyDescriptor
+) {
+  const originalMethod = descriptor.value;
+  const adjDescriptor: PropertyDescriptor = {
+    configurable: true,
+    enumerable: false,
+    get() {
+      const boundFn = originalMethod.bind(this);
+      return boundFn;
+    },
+  };
+  return adjDescriptor;
+}
+
+class Printer {
+  message = "This works";
+
+  @Autobind
+  showMessage() {
+    console.log(this.message);
+  }
+}
+
+const p = new Printer();
+// p.showMessage()
+const button = document.querySelector("button");
+// button?.addEventListener("click", p.showMessage.bind(p));
+button?.addEventListener("click", p.showMessage);
