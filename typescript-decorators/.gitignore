@@ -240,11 +240,17 @@ output.json
 # IntelliJ
 *.iml
 <<<<<<< HEAD
+<<<<<<< HEAD
 misc.xml
 deploymentTargetDropDown.xml
 render.experimental.xml
 =======
 >>>>>>> decorators
+=======
+misc.xml
+deploymentTargetDropDown.xml
+render.experimental.xml
+>>>>>>> generics
 
 # Keystore files
 *.jks
@@ -275,11 +281,17 @@ gradle-app.setting
 !gradle-wrapper.jar
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 # Avoid ignore Gradle wrappper properties
 !gradle-wrapper.properties
 
 =======
 >>>>>>> decorators
+=======
+# Avoid ignore Gradle wrappper properties
+!gradle-wrapper.properties
+
+>>>>>>> generics
 # Cache of project
 .gradletasknamecache
 
@@ -420,7 +432,10 @@ Temporary Items
 !.vscode/launch.json
 !.vscode/extensions.json
 !.vscode/*.code-snippets
+<<<<<<< HEAD
 launch.json
+=======
+>>>>>>> generics
 
 # Local History for Visual Studio Code
 .history/
