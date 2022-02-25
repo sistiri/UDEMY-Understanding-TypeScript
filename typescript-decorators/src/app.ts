@@ -31,7 +31,7 @@ class Person {
 const pers = new Person();
 console.log(pers);
 
-// PROPERTY DECORATORS
+// PROPERTY, ACCESSOR, METHOD, PARAMETER DECORATORS
 
 function Log(target: any, propertyName: string | Symbol) {
   console.log("---- Property decorator! ----");
@@ -50,6 +50,13 @@ function Log3(target: any, name: string | Symbol, descriptor: PropertyDescriptor
     console.log(target);
     console.log(name);
     console.log(descriptor);
+}
+
+function Log4(target: any, name: string | Symbol, position: number) {
+    console.log("---- Parameter decorator! ----");
+    console.log(target);
+    console.log(name);
+    console.log(position);
 }
 
 class Product {
@@ -72,7 +79,7 @@ class Product {
   }
 
   @Log3
-  getPriceWithtax(tax: number) {
+  getPriceWithtax(@Log4 tax: number) {
     return this._price * (1 + tax);
   }
 }
