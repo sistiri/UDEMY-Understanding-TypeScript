@@ -1,9 +1,9 @@
-/// <reference path='base-component.ts' />
-/// <reference path='../models/drag-drop.ts' />
-/// <reference path='../models/project.ts' />
-/// <reference path='../decorators/autobind.ts' />
+import { Autobind } from '../decorators/autobind.js';
+import { Draggable } from '../models/drag-drop.js'
+import { Project } from '../models/project.js';
+import { Component } from './base-component.js';
 
-namespace App {
+
   // ProjectItem Class
 
   export class ProjectItem
@@ -51,4 +51,4 @@ namespace App {
       this.element.querySelector("p")!.textContent = this.project.description;
     }
   }
-}
+
