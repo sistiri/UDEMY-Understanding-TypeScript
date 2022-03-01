@@ -1,11 +1,12 @@
 import { Autobind } from "../decorators/autobind.js";
-import { projectState } from "../state/project-state.js";
-import { Validatable, validate } from "../util/validation.js";
-import { Component } from "./base-component.js";
+import { projectState as ProjectState} from "../state/project-state.js";
+// import { Validatable, validate } from "../util/validation.js";
+import * as Validation from "../util/validation.js";
+import Cmp from "./base-component.js";
 
     // ProjectInput Class
 
-  export class ProjectInput extends Component<HTMLDivElement, HTMLFormElement> {
+  export class ProjectInput extends Cmp<HTMLDivElement, HTMLFormElement> {
     titleInputElement: HTMLInputElement;
     descriptionInputElement: HTMLInputElement;
     peopleInputElement: HTMLInputElement;
@@ -36,16 +37,16 @@ import { Component } from "./base-component.js";
       const enteredDescription = this.descriptionInputElement.value;
       const enteredPeople = this.peopleInputElement.value;
 
-      const titleValidatable: Validatable = {
+      const titleValidatable: Validation.Validatable = {
         value: enteredTitle,
         required: true,
       };
-      const descriptionValidatable: Validatable = {
+      const descriptionValidatable: Validation.Validatable = {
         value: enteredDescription,
         required: true,
         minLength: 5,
       };
-      const peopleValidatable: Validatable = {
+      const peopleValidatable: Validation.Validatable = {
         value: +enteredPeople,
         required: true,
         min: 1,
@@ -53,9 +54,9 @@ import { Component } from "./base-component.js";
       };
 
       if (
-        !validate(titleValidatable) ||
+        !Validation.validate(titleValidatable) ||
         !descriptionValidatable ||
-        !validate(peopleValidatable)
+        !Validation.validate(peopleValidatable)
       ) {
         alert("Invalid input, please try again");
         return;
@@ -77,7 +78,7 @@ import { Component } from "./base-component.js";
       if (Array.isArray(userInput)) {
         const [title, desc, people] = userInput;
         console.log(title, desc, people);
-        projectState.addProject(title, desc, people);
+        ProjectState.addProject(title, desc, people);
         this.clearInputs();
       }
     }
