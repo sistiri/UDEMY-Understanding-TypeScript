@@ -30,3 +30,7 @@ const loadedProducts = plainToClass(Product, products);
 for (const prod of loadedProducts) {
   console.log(prod.getInformation());
 }
+
+// Using "declare" as a "Last Resort"
+declare const GLOBAL: string
+console.log(GLOBAL)
