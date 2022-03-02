@@ -1,15 +1,40 @@
-const form = document.querySelector("form")!;
-const addressInput = document.getElementById('address')! as HTMLInputElement
+import axios from "axios";
 
-const GOOGLE_API_KEY = ''
+const form = document.querySelector("form")!;
+const addressInput = document.getElementById("address")! as HTMLInputElement;
+
+const GOOGLE_API_KEY = "";
 // https://developers.google.com/maps/documentation/geocoding/start#geocoding-request-and-response-latitudelongitude-lookup
 
-function searchAddressHandler(event: Event) {
-    event.preventDefault()
-    const enteredAdrress = addressInput.value
-    console.log(enteredAdrress)
+type GoogleGeocodingResponse = {
+  results: { geometry: { location: { lat: number; lng: number } } }[];
+  status: "OK" | "ZERO_RESULTS";
+// https://developers.google.com/maps/documentation/geocoding/requests-geocoding#StatusCodes
+};
 
-    // send this to Google's API!
+function searchAddressHandler(event: Event) {
+  event.preventDefault();
+  const enteredAddress = addressInput.value;
+
+  // send this to Google's API!
+
+  axios
+    .get<GoogleGeocodingResponse>(
+      `https://maps.googleapis.com/maps/api/geocode/json?address=${encodeURI(
+        enteredAddress
+      )}&key=${GOOGLE_API_KEY}`
+    )
+    .then((response) => {
+        console.log(response)
+      if (response.data.status !== "OK") {
+        throw new Error("Could not fetch location!");
+      }
+      const coordinates = response.data.results[0].geometry.location;
+    })
+    .catch((err) => {
+      alert(err.message);
+      console.log(err);
+    });
 }
 
 form.addEventListener("submit", searchAddressHandler);
